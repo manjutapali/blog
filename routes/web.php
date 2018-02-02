@@ -11,19 +11,10 @@
 |
 */
 
-Route::get('tasks', function () {
+Route::get('tasks', 'TaskController@index');
 
-	$tasks = App\Task::all();
+Route::get('tasks/{task}', 'TaskController@show');
 
-    return view('welcome', compact('tasks'));
-});
-
-Route::get('tasks/{task}', function($id) {
-
-	$task = App\Task::find($id);
-	
-	return view('tasks.show', compact('task'));
-});
 
 Route::get('about', function() {
 	return view('about');
