@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Laravel test</title>
-</head>
-<body>
-    <ul>
+@extends('layout.master')
+
+@section('content')
+
         @foreach ($tasks as $task)
-            <li>
-
-            <a href="tasks/{{$task->id}}">  {{ $task->body }}  </a>
-
-            </li>
+            <div class="card list-main">
+                <h4> {{$task->id}} </h4>
+                <a href="tasks/{{$task->id}}">  {{ $task->body }}  </a>
+            </div>
         @endforeach
-    </ul>
-</body>
-</html>
+
+@endsection

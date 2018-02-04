@@ -1,9 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	<h1> {{ $task->body }} </h1>
-</body>
-</html>
+@extends ('layout.master')
+
+
+@section ('content')
+	<section class="card-section">
+		<div class="card">
+			<h4 class="card-title">{{$task->id}}</h4>
+			<p class="card-text">{{$task->body}} </p>
+		</div>
+	</section>
+@endsection
