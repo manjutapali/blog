@@ -24,9 +24,9 @@
 
       <div class="row">
 
-      @yield('content')
+        @yield('content')
 
-      @include('layout.sidebar')
+        @include('layout.sidebar')
         
       </div>
 

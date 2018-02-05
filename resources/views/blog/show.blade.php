@@ -1,11 +1,8 @@
-@extends ('layout.master')
+@extends ('index')
 
 
 @section ('content')
-	<section class="card-section">
-		<div class="card">
-			<h4 class="card-title">{{$task->id}}</h4>
-			<p class="card-text">{{$task->body}} </p>
-		</div>
-	</section>
+	<div class="col-md-8">
+		@include('layout.post')
+	</div>
 @endsection

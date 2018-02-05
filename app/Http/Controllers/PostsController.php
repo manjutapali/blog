@@ -9,12 +9,21 @@ class PostsController extends Controller
 {
     public function index()
     {
-    	return view('blog.maincontent');
+    	$posts = posts::where('front', 1)->latest()->get();
+
+    	return view('blog.maincontent', compact('posts'));
     }
 
     public function create()
     {
     	return view('blog.create');
+    }
+
+    public function show(posts $post)
+    {
+    	//$post = posts::find($id);
+
+    	return view('blog.show', compact('post'));
     }
 
     public function store()
