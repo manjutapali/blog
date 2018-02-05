@@ -18,7 +18,11 @@
 		    <input type="checkbox" class="form-check-input" id="front" name="front">
 		    <label class="form-check-label" for="front">Add to front</label>
 		  </div>
-		  <button type="submit" class="btn btn-success">Submit</button>
+		  <div class="form-group">
+		  	<button type="submit" class="btn btn-success">Submit</button>
+		  </div>
+
+		  @include('layout.errors')
 		</form>
 	</div>
 @endsection

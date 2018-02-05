@@ -19,6 +19,12 @@ class PostsController extends Controller
 
     public function store()
     {
+    	
+    	$this->validate(request(), [
+    		'title' => 'required',
+    		'content' => 'required'
+    	]);
+
     	$front = (request('front') == "on" ) ? 1 : 0;
     	
     	posts::create([
