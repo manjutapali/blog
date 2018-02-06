@@ -27,5 +27,19 @@
       @endforeach
     </ul>
   </div>
+
+  <div class="card card-comment">
+    <form method="POST" action="/posts/{{$post->id}}/comment">
+      {{ csrf_field() }}
+      <div class="form-group">
+        <textarea class="form-control" placeholder="You comment" name="body" required></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  @include('layout.errors')
     
 </div>
