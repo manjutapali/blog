@@ -11,4 +11,9 @@ class posts extends Model
 
     // Inverse of fillable, add the fields, which should not exposed to the user.
     //protected $guarded = []
+
+    public function comments()
+    {
+    	return $this->hasMany(Comment::class);
+    }
 }
