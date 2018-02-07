@@ -5,8 +5,9 @@
       {{ $post->title }}
     </a>
   </h2>
-  <p class="blog-post-meta"> 
-    {{ $post->created_at->toFormattedDateString() }} 
+  <p class="blog-post-meta">
+    {{ $post->user->name }} on
+    {{ $post->created_at->toFormattedDateString() }}
   </p>
   
   <hr>
@@ -28,17 +29,19 @@
     </ul>
   </div>
 
-  <div class="card card-comment">
-    <form method="POST" action="/posts/{{$post->id}}/comment">
-      {{ csrf_field() }}
-      <div class="form-group">
-        <textarea class="form-control" placeholder="You comment" name="body" required></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-success">Submit</button>
-      </div>
-    </form>
-  </div>
+  @if(auth()->check())
+    <div class="card card-comment">
+      <form method="POST" action="/posts/{{$post->id}}/comment">
+        {{ csrf_field() }}
+        <div class="form-group">
+          <textarea class="form-control" placeholder="You comment" name="body" required></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+      </form>
+    </div>
+  @endif
 
   @include('layout.errors')
     

@@ -7,6 +7,12 @@ use App\posts;
 
 class PostsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     public function index()
     {
     	$posts = posts::where('front', 1)->latest()->get();
@@ -39,8 +45,11 @@ class PostsController extends Controller
     	posts::create([
     		'title' => request('title'),
     		'content' => request('content'),
+            'user_id' => auth()->id(),
     		'front' => $front
     	]);
+
+        // auth()->user()->publish(new posts(request(['title', 'body']))); add Mutator for front.
 
     	return redirect('/');
     }
