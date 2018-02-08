@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class posts extends Model
 {
@@ -28,5 +29,19 @@ class posts extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    // Filtering the posts based on month & year. (archives)
+    public function scopeFilter($query, $filter) 
+    {
+        if($month = $filter['month'])
+        {
+            $query->whereMonth('created_at', Carbon::parse($month)->month);
+        }
+
+        if($year = $filter['year'])
+        {
+            $query->whereYear('created_at', $year);
+        }
     }
 }

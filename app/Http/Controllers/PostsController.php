@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\posts;
+use Carbon\Carbon;
 
 class PostsController extends Controller
 {
@@ -15,9 +16,36 @@ class PostsController extends Controller
 
     public function index()
     {
-    	$posts = posts::where('front', 1)->latest()->get();
+    	$posts = posts::latest();
 
-    	return view('blog.maincontent', compact('posts'));
+        if(request(['month', 'year'])) {
+            $posts->filter(request(['month', 'year']));
+        }   
+        
+        $posts = $posts->get();
+
+        /* Delete content after addign the query scope.
+
+        if($month = request('month'))
+        {
+            $posts->whereMonth('created_at', Carbon::Parse($month)->month);
+        }
+
+        if($year = request('year'))
+        {
+            $posts->whereYear('created_at', $year);
+        }
+        
+        $posts = $posts->get();
+        */
+        
+        $archives = posts::selectRaw('year(created_at) as year, monthname(created_at) as month, count(*)')
+        ->groupBy('month','year')->
+        orderByRaw('min(created_at) desc')
+        ->get()
+        ->toArray();
+
+    	return view('blog.maincontent', compact('posts', 'archives'));
     }
 
     public function create()
