@@ -26,6 +26,18 @@ class posts extends Model
         ]);
     }
 
+    public static function archives()
+    {
+        
+        return static::selectRaw('year(created_at) as year, monthname(created_at) as month, count(*)')
+        ->groupBy('month', 'year')
+        ->orderByRaw('min(created_at) desc')
+        ->get()
+        ->toArray();
+
+        
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
